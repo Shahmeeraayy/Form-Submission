@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HQ Learning Hub – Compete in the Canadian Job Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;color:#1A2A3F;background:#fff;line-height:1.65;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* ========== PALETTE ========== */
+:root{
+  --navy:#0B1D3A;
+  --navy-mid:#132B52;
+  --navy-light:#1A3664;
+  --maple:#C8372D;
+  --maple-dark:#A82E25;
+  --maple-glow:rgba(200,55,45,0.12);
+  --gold:#D4A853;
+  --ice:#E8EDF5;
+  --snow:#F6F8FC;
+  --white:#FFFFFF;
+  --text:#1A2A3F;
+  --text-mid:#3D5068;
+  --text-light:#6B7F96;
+  --border:#D0D9E6;
+  --section-pad:clamp(64px,10vw,120px);
+}
+
+/* ========== UTILITY ========== */
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* ========== REVEAL ANIMATION ========== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s cubic-bezier(.22,.61,.36,1),transform 0.7s cubic-bezier(.22,.61,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+
+/* ========== STICKY HEADER ========== */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(11,29,58,0.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transform:translateY(-100%);
+  transition:transform .4s cubic-bezier(.22,.61,.36,1);
+}
+.site-header.show{transform:translateY(0)}
+.site-header .container{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.header-brand{
+  font-weight:700;font-size:.95rem;color:#fff;
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+.header-brand span{color:var(--maple)}
+.header-cta{
+  padding:10px 24px;background:var(--maple);color:#fff;
+  border-radius:8px;font-weight:600;font-size:.85rem;
+  transition:background .2s;letter-spacing:.3px;
+}
+.header-cta:hover{background:var(--maple-dark)}
+
+/* ========== HERO ========== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:var(--navy);position:relative;overflow:hidden;
+  padding:120px 0 var(--section-pad);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 75% 20%,rgba(200,55,45,0.08) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 60% at 10% 80%,rgba(200,55,45,0.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* Decorative floating circles */
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.hero-orb-1{width:420px;height:420px;top:-120px;right:-80px;border:1px solid rgba(200,55,45,0.08);animation:orbFloat 20s ease-in-out infinite}
+.hero-orb-2{width:280px;height:280px;bottom:-60px;left:-60px;border:1px solid rgba(255,255,255,0.04);animation:orbFloat 16s ease-in-out infinite reverse}
+.hero-orb-3{width:160px;height:160px;top:30%;right:12%;background:rgba(200,55,45,0.04);animation:orbFloat 12s ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-20px)}}
+
+.hero .container{position:relative;z-index:2;max-width:820px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.78rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--maple);margin-bottom:28px;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1.5px;background:var(--maple);border-radius:2px}
+
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.18;
+  color:var(--white);margin-bottom:24px;max-width:750px;
+}
+.hero h1 em{
+  font-style:italic;color:var(--maple);
+  background:linear-gradient(135deg,var(--maple),#E06050);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(1rem,1.8vw,1.15rem);color:#90A4BF;
+  max-width:580px;line-height:1.75;margin-bottom:40px;
+}
+.hero-cta-group{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 36px;background:var(--maple);color:#fff;
+  border-radius:10px;font-weight:600;font-size:1rem;
+  transition:background .2s,transform .15s;letter-spacing:.3px;
+}
+.btn-primary:hover{background:var(--maple-dark);transform:translateY(-1px)}
+.btn-ghost{
+  padding:16px 28px;color:#90A4BF;
+  font-weight:500;font-size:.92rem;
+  transition:color .2s;
+}
+.btn-ghost:hover{color:#fff}
+.btn-primary svg{transition:transform .2s}
+.btn-primary:hover svg{transform:translateX(3px)}
+
+/* ========== SOCIAL PROOF BAR ========== */
+.proof-bar{
+  background:var(--snow);border-top:1px solid var(--ice);
+  border-bottom:1px solid var(--ice);
+  padding:36px 0;
+}
+.proof-bar .container{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:48px;
+}
+.proof-stat{text-align:center}
+.proof-stat .num{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);
+  display:block;line-height:1.1;
+}
+.proof-stat .label{
+  font-size:.82rem;color:var(--text-light);
+  margin-top:4px;font-weight:500;letter-spacing:.5px;
+}
+
+/* ========== PAIN POINTS ========== */
+.pain-section{
+  padding:var(--section-pad) 0;background:var(--white);
+}
+.section-eyebrow{
+  font-size:.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--maple);margin-bottom:14px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.22;
+  max-width:600px;margin-bottom:16px;color:var(--navy);
+}
+.section-sub{
+  font-size:1rem;color:var(--text-light);max-width:520px;
+  margin-bottom:48px;line-height:1.7;
+}
+.pain-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.pain-card{
+  background:var(--snow);border:1px solid var(--ice);
+  border-radius:14px;padding:32px 28px;
+  transition:transform .25s,box-shadow .25s;
+}
+.pain-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(11,29,58,0.06)}
+.pain-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--maple-glow);display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.pain-icon svg{width:22px;height:22px;color:var(--maple)}
+.pain-card h3{
+  font-weight:600;font-size:1.05rem;margin-bottom:10px;
+  color:var(--navy);line-height:1.35;
+}
+.pain-card p{font-size:.9rem;color:var(--text-light);line-height:1.65}
+
+/* ========== HOW IT WORKS ========== */
+.how-section{
+  padding:var(--section-pad) 0;
+  background:var(--navy);color:var(--white);position:relative;overflow:hidden;
+}
+.how-section::before{
+  content:'';position:absolute;top:0;right:0;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,55,45,0.06),transparent 70%);
+  pointer-events:none;
+}
+.how-section .section-title{color:var(--white)}
+.how-section .section-sub{color:#7A91AE}
+.steps-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  position:relative;
+}
+.steps-row::before{
+  content:'';position:absolute;top:36px;left:calc(16.66% + 16px);
+  right:calc(16.66% + 16px);height:2px;
+  background:linear-gradient(90deg,var(--maple),rgba(200,55,45,0.2));
+  border-radius:2px;
+}
+.step{text-align:center;position:relative;z-index:2}
+.step-num{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 24px;
+  background:var(--navy-mid);border:2px solid rgba(200,55,45,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;
+  color:var(--maple);
+  transition:background .3s,border-color .3s;
+}
+.step:hover .step-num{background:var(--maple);border-color:var(--maple);color:#fff}
+.step h3{font-weight:600;font-size:1rem;margin-bottom:8px}
+.step p{font-size:.88rem;color:#7A91AE;max-width:280px;margin:0 auto;line-height:1.6}
+
+/* ========== WHAT'S INCLUDED ========== */
+.included-section{
+  padding:var(--section-pad) 0;background:var(--white);
+}
+.included-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.inc-card{
+  padding:28px 24px;border-radius:12px;
+  border:1px solid var(--ice);
+  transition:border-color .25s,box-shadow .25s;
+}
+.inc-card:hover{border-color:var(--maple);box-shadow:0 4px 20px var(--maple-glow)}
+.inc-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--maple-glow);display:flex;
+  align-items:center;justify-content:center;margin-bottom:16px;
+}
+.inc-icon svg{width:20px;height:20px;color:var(--maple)}
+.inc-card h3{font-weight:600;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+.inc-card p{font-size:.85rem;color:var(--text-light);line-height:1.6}
+
+/* ========== TESTIMONIAL ========== */
+.testimonial-section{
+  padding:var(--section-pad) 0;background:var(--snow);
+  border-top:1px solid var(--ice);border-bottom:1px solid var(--ice);
+}
+.testimonial-block{
+  max-width:720px;margin:0 auto;text-align:center;
+}
+.quote-mark{
+  font-family:'Playfair Display',serif;font-size:5rem;
+  line-height:.8;color:var(--maple);opacity:.25;margin-bottom:8px;
+}
+.testimonial-block blockquote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(1.1rem,2.2vw,1.45rem);line-height:1.6;
+  color:var(--navy);margin-bottom:28px;
+}
+.testi-author{display:flex;align-items:center;justify-content:center;gap:14px}
+.testi-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--navy-light));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#fff;font-size:.9rem;
+}
+.testi-meta .testi-name{font-weight:600;font-size:.92rem;color:var(--navy)}
+.testi-meta .testi-role{font-size:.82rem;color:var(--text-light)}
+
+/* ========== FORM SECTION ========== */
+.form-section{
+  padding:var(--section-pad) 0;
+  background:var(--navy);position:relative;overflow:hidden;
+}
+.form-section::before{
+  content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,55,45,0.06),transparent 60%);
+  pointer-events:none;
+}
+.form-wrapper{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  position:relative;z-index:2;
+}
+.form-text h2{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.5rem,3.5vw,2.1rem);line-height:1.22;
+  color:#fff;margin-bottom:16px;
+}
+.form-text p{color:#7A91AE;font-size:1rem;line-height:1.7;margin-bottom:28px}
+.form-benefits{display:flex;flex-direction:column;gap:14px}
+.form-benefits li{
+  display:flex;align-items:center;gap:12px;
+  color:#A0B8D0;font-size:.9rem;
+}
+.form-benefits li .fb-check{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:rgba(200,55,45,0.15);display:flex;align-items:center;justify-content:center;
+}
+.form-benefits li .fb-check svg{width:12px;height:12px}
+
+.form-box{
+  background:var(--white);border-radius:16px;padding:40px 36px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+}
+.form-box h3{
+  font-family:'Playfair Display',serif;font-weight:600;
+  font-size:1.25rem;margin-bottom:4px;color:var(--navy);
+}
+.form-box .form-sub{
+  font-size:.88rem;color:var(--text-light);margin-bottom:24px;
+}
+.field{margin-bottom:18px}
+.field label{
+  display:block;font-weight:500;font-size:.83rem;
+  margin-bottom:5px;color:var(--text);
+}
+.field label .opt{font-weight:400;color:var(--text-light);font-size:.78rem}
+.field input,.field select{
+  width:100%;padding:12px 14px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:inherit;font-size:.9rem;color:var(--text);
+  background:var(--snow);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235A6B80' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;
+}
+.field input:focus,.field select:focus{
+  border-color:var(--maple);box-shadow:0 0 0 3px rgba(200,55,45,0.15);
+}
+.field input::placeholder{color:#9EACBE}
+.submit-btn{
+  width:100%;padding:14px;background:var(--maple);color:#fff;
+  border-radius:10px;font-size:.95rem;font-weight:600;
+  transition:background .2s,transform .1s;margin-top:6px;letter-spacing:.3px;
+}
+.submit-btn:hover{background:var(--maple-dark)}
+.submit-btn:active{transform:scale(.985)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.form-privacy{text-align:center;font-size:.76rem;color:var(--text-light);margin-top:14px}
+.error-toast{
+  display:none;background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;
+  padding:10px 14px;border-radius:8px;font-size:.85rem;margin-bottom:14px;
+}
+.success-message{
+  display:none;text-align:center;padding:28px 0;
+}
+.success-message .suc-icon{
+  width:56px;height:56px;border-radius:50%;
+  background:rgba(34,160,90,0.1);display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+}
+.success-message h4{
+  font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:6px;
+}
+.success-message p{font-size:.88rem;color:var(--text-light);max-width:260px;margin:0 auto}
+
+/* ========== FAQ ========== */
+.faq-section{padding:var(--section-pad) 0;background:var(--white)}
+.faq-section .container{max-width:760px}
+.faq-section .section-title{text-align:center;margin-left:auto;margin-right:auto}
+.faq-section .section-sub{text-align:center;margin-left:auto;margin-right:auto;margin-bottom:40px}
+.faq-item{
+  border-bottom:1px solid var(--ice);
+}
+.faq-btn{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0;background:none;font-family:inherit;
+  font-weight:600;font-size:.95rem;color:var(--navy);text-align:left;
+  gap:16px;
+}
+.faq-btn .faq-icon{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--snow);display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--maple-glow)}
+.faq-answer{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.22,.61,.36,1),padding .35s;
+}
+.faq-item.open .faq-answer{max-height:300px}
+.faq-answer p{
+  padding-bottom:20px;font-size:.9rem;color:var(--text-light);line-height:1.7;
+}
+
+/* ========== FOOTER ========== */
+.site-footer{
+  background:var(--navy);padding:40px 0;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+.footer-brand{font-weight:700;color:#fff;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase}
+.footer-brand span{color:var(--maple)}
+.footer-note{font-size:.8rem;color:#5A6B80;max-width:420px}
+.footer-disclaimer{
+  margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);
+  font-size:.75rem;color:#3D5068;text-align:center;
+}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:900px){
+  .pain-grid,.included-grid{grid-template-columns:1fr 1fr}
+  .steps-row{grid-template-columns:1fr;gap:40px}
+  .steps-row::before{display:none}
+  .form-wrapper{grid-template-columns:1fr;gap:40px}
+}
+@media(max-width:600px){
+  .pain-grid,.included-grid{grid-template-columns:1fr}
+  .proof-bar .container{gap:32px}
+  .hero h1{font-size:1.7rem}
+  .form-box{padding:28px 22px}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== STICKY HEADER ===== -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-brand">HQ <span>Learning Hub</span></div>
+    <a href="#apply" class="header-cta">Get Started</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="container">
+    <div class="hero-eyebrow reveal">Professional Positioning Program</div>
+    <h1 class="reveal reveal-d1">Canadian employers aren't rejecting your experience. They're rejecting your <em>presentation.</em></h1>
+    <p class="hero-sub reveal reveal-d2">A 30-day program that teaches international professionals how the Canadian job market actually works — and how to position yourself so employers take you seriously.</p>
+    <div class="hero-cta-group reveal reveal-d3">
+      <a href="#apply" class="btn-primary">
+        Start Your Transformation
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#how" class="btn-ghost">See how it works ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL PROOF BAR ===== -->
+<section class="proof-bar">
+  <div class="container">
+    <div class="proof-stat reveal"><span class="num" data-target="1200">0</span><span class="label">Professionals Trained</span></div>
+    <div class="proof-stat reveal reveal-d1"><span class="num" data-target="45">0</span><span class="label">Countries Represented</span></div>
+    <div class="proof-stat reveal reveal-d2"><span class="num" data-target="12">0</span><span class="label">Industries Covered</span></div>
+    <div class="proof-stat reveal reveal-d3"><span class="num" data-target="30">0</span><span class="label">Day Program</span></div>
+  </div>
+</section>
+
+<!-- ===== PAIN POINTS ===== -->
+<section class="pain-section" id="problem">
+  <div class="container">
+    <div class="section-eyebrow reveal">Sound familiar?</div>
+    <h2 class="section-title reveal reveal-d1">The real reason your applications aren't working</h2>
+    <p class="section-sub reveal reveal-d2">It's not your qualifications. It's how you're presenting them in a market with different rules.</p>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Hundreds of applications, zero callbacks</h3>
+        <p>You keep applying online but hear nothing back. The problem isn't volume — it's that your resume doesn't speak the language Canadian employers expect.</p>
+      </div>
+      <div class="pain-card reveal reveal-d1">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+        </div>
+        <h3>Qualified but invisible to employers</h3>
+        <p>You have the skills and experience. But if your LinkedIn profile, resume, and communication don't create immediate confidence, employers simply move on.</p>
+      </div>
+      <div class="pain-card reveal reveal-d2">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>No strategy, just hope</h3>
+        <p>Without understanding how Canadian hiring actually works — employer psychology, ATS systems, positioning — even the most talented professionals stay stuck.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-eyebrow reveal">How it works</div>
+    <h2 class="section-title reveal reveal-d1">Three shifts that change everything</h2>
+    <p class="section-sub reveal reveal-d2">The program is built around changing how employers perceive you — not changing who you are.</p>
+    <div class="steps-row">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Understand the Market</h3>
+        <p>Learn how Canadian employers actually evaluate candidates, make decisions, and what creates confidence in the hiring process.</p>
+      </div>
+      <div class="step reveal reveal-d1">
+        <div class="step-num">2</div>
+        <h3>Rebuild Your Positioning</h3>
+        <p>Restructure your resume, LinkedIn, cover letters, and communication to align with Canadian professional standards and ATS systems.</p>
+      </div>
+      <div class="step reveal reveal-d2">
+        <div class="step-num">3</div>
+        <h3>Apply With Strategy</h3>
+        <p>Move from random applications to targeted outreach with networking, referral strategies, and interview techniques that convert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT'S INCLUDED ===== -->
+<section class="included-section" id="included">
+  <div class="container">
+    <div class="section-eyebrow reveal">What's included</div>
+    <h2 class="section-title reveal reveal-d1">Everything you need to compete</h2>
+    <p class="section-sub reveal reveal-d2">A complete professional positioning system, not a basic course.</p>
+    <div class="included-grid">
+      <div class="inc-card reveal">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <h3>Resume & Cover Letter Training</h3>
+        <p>Build ATS-friendly documents aligned with Canadian standards that communicate your value clearly.</p>
+      </div>
+      <div class="inc-card reveal reveal-d1">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Interview Coaching</h3>
+        <p>Develop confidence, clarity, and authority in how you communicate during professional interactions.</p>
+      </div>
+      <div class="inc-card reveal reveal-d2">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>LinkedIn Optimization</h3>
+        <p>Position your profile to attract recruiters and Canadian employers actively hiring in your field.</p>
+      </div>
+      <div class="inc-card reveal">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>LMIA Job Board Access</h3>
+        <p>Verified Canadian job opportunities updated regularly with LMIA-focused positions across industries.</p>
+      </div>
+      <div class="inc-card reveal reveal-d1">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Weekly Live Sessions</h3>
+        <p>Strategy sessions with experts covering hiring trends, positioning, and real-time Q&A every week.</p>
+      </div>
+      <div class="inc-card reveal reveal-d2">
+        <div class="inc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Continued Access</h3>
+        <p>Keep learning after 30 days with an optional $97/month subscription for ongoing support and updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="testimonial-block reveal">
+      <div class="quote-mark">"</div>
+      <blockquote>I spent eight months applying to everything with no response. Within three weeks of the program, I understood why. Once I changed my positioning, I got three interview calls in one week.</blockquote>
+      <div class="testi-author">
+        <div class="testi-avatar">AK</div>
+        <div class="testi-meta">
+          <div class="testi-name">Amina K.</div>
+          <div class="testi-role">Mechanical Engineer · Nigeria → Toronto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM SECTION ===== -->
+<section class="form-section" id="apply">
+  <div class="container">
+    <div class="form-wrapper">
+      <div class="form-text reveal">
+        <h2>Ready to stop guessing and start competing?</h2>
+        <p>Fill in your details and our team will reach out with everything you need to know about the program — no pressure, just clarity.</p>
+        <ul class="form-benefits">
+          <li><span class="fb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#C8372D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Personalized response within 24 hours</li>
+          <li><span class="fb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#C8372D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> No spam — just helpful information</li>
+          <li><span class="fb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#C8372D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Works for professionals at any career stage</li>
+          <li><span class="fb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#C8372D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Inside & outside Canada welcome</li>
+        </ul>
+      </div>
+
+      <div class="form-box reveal reveal-d2">
+        <h3>Get started today</h3>
+        <p class="form-sub">Takes less than 30 seconds.</p>
+
+        <div class="error-toast" id="errorToast"></div>
+
+        <form id="leadForm">
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="e.g. Amara Johnson" required>
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number <span class="opt">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="field">
+            <label for="situation">Where are you in your journey?</label>
+            <select id="situation" name="situation" required>
+              <option value="" disabled selected>Select one…</option>
+              <option value="outside_canada">Outside Canada — planning to move</option>
+              <option value="new_in_canada">Recently arrived in Canada</option>
+              <option value="job_searching">In Canada — actively job searching</option>
+              <option value="career_change">Looking to switch careers in Canada</option>
+              <option value="exploring">Just exploring options</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Get My Free Consultation</button>
+        </form>
+
+        <div class="success-message" id="successMsg">
+          <div class="suc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#22A05A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>You're in!</h4>
+          <p>Check your inbox — we'll reach out personally within 24 hours.</p>
+        </div>
+
+        <p class="form-privacy">Your information is private and never shared.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-eyebrow reveal" style="text-align:center">Common Questions</div>
+    <h2 class="section-title reveal reveal-d1">Frequently asked questions</h2>
+    <p class="section-sub reveal reveal-d2">Everything you need to know before getting started.</p>
+
+    <div class="faq-item reveal">
+      <button class="faq-btn" aria-expanded="false">
+        What industries does the program apply to?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>The program applies to all industries including technology, healthcare, engineering, construction, transportation, manufacturing, hospitality, finance, education, energy, logistics, aviation, retail, agriculture, oil and gas, renewable energy, and more. It works for both professional and technical occupations.</p></div>
+    </div>
+
+    <div class="faq-item reveal reveal-d1">
+      <button class="faq-btn" aria-expanded="false">
+        Do I need to already be in Canada?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>No. The program supports individuals both inside and outside Canada who want to better understand the Canadian job market and improve their professional positioning.</p></div>
+    </div>
+
+    <div class="faq-item reveal reveal-d1">
+      <button class="faq-btn" aria-expanded="false">
+        Is this only for university degree holders?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>Not at all. The program is designed for professionals, skilled trades workers, technicians, service workers, drivers, supervisors, and anyone with practical hands-on experience. It works across all education levels.</p></div>
+    </div>
+
+    <div class="faq-item reveal reveal-d2">
+      <button class="faq-btn" aria-expanded="false">
+        Does the program guarantee a job?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>No. The program focuses on strategic preparation, professional positioning, and improving how you present yourself. Results depend on your commitment, implementation, and willingness to apply the strategies consistently.</p></div>
+    </div>
+
+    <div class="faq-item reveal reveal-d2">
+      <button class="faq-btn" aria-expanded="false">
+        How long is the program and what does it cost?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>The structured program is 30 days and the investment is $1,497 USD. After completing the program, you can continue accessing the platform for $97/month. This is a complete professional positioning system — not a basic course or template pack.</p></div>
+    </div>
+
+    <div class="faq-item reveal reveal-d3">
+      <button class="faq-btn" aria-expanded="false">
+        What if I've already applied to hundreds of jobs?
+        <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>Applying to more jobs without improving your positioning usually doesn't solve the problem. The program teaches you that strategic alignment and presentation matter far more than application volume. It's about being seen differently, not seen more often.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">HQ <span>Learning Hub</span></div>
+      <p class="footer-note">A professional positioning program for international professionals entering the Canadian job market.</p>
+    </div>
+    <p class="footer-disclaimer">HQ Learning Hub is not a recruitment agency, immigration consultancy, or job placement service. Results depend on individual effort and implementation. © 2026 HQ Learning Hub. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// =============================================
+//  CONFIG — Replace with your n8n webhook URL
+// =============================================
+const WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE.app.n8n.cloud/webhook/lead-capture';
+
+// ===== Generate Lead ID =====
+function generateLeadId(){
+  const t=Date.now().toString(36);
+  const r=Math.random().toString(36).substring(2,7);
+  return('HQ-'+t+'-'+r).toUpperCase();
+}
+
+// ===== Reveal on Scroll =====
+const revealEls=document.querySelectorAll('.reveal');
+const revealObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}});
+},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>revealObs.observe(el));
+
+// ===== Sticky Header =====
+const header=document.getElementById('siteHeader');
+const heroEl=document.getElementById('hero');
+const headerObs=new IntersectionObserver(([e])=>{
+  header.classList.toggle('show',!e.isIntersecting);
+},{threshold:0,rootMargin:'-100px 0px 0px 0px'});
+headerObs.observe(heroEl);
+
+// ===== Counter Animation =====
+const counters=document.querySelectorAll('[data-target]');
+const counterObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const target=parseInt(el.dataset.target);
+    const dur=1400;
+    const start=performance.now();
+    function tick(now){
+      const p=Math.min((now-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      el.textContent=Math.round(ease*target).toLocaleString()+'+';
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    counterObs.unobserve(el);
+  });
+},{threshold:0.5});
+counters.forEach(c=>counterObs.observe(c));
+
+// ===== FAQ Accordion =====
+document.querySelectorAll('.faq-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const isOpen=item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+// ===== Form Submission =====
+const form=document.getElementById('leadForm');
+const submitBtn=document.getElementById('submitBtn');
+const errorToast=document.getElementById('errorToast');
+const successMsg=document.getElementById('successMsg');
+
+form.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  errorToast.style.display='none';
+
+  const payload={
+    lead_id:generateLeadId(),
+    full_name:document.getElementById('fullName').value.trim(),
+    email:document.getElementById('email').value.trim(),
+    phone:document.getElementById('phone').value.trim()||null,
+    situation:document.getElementById('situation').value,
+    submitted_at:new Date().toISOString()
+  };
+
+  submitBtn.disabled=true;
+  submitBtn.textContent='Sending…';
+
+  try{
+    const res=await fetch(WEBHOOK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(!res.ok)throw new Error('Status '+res.status);
+    form.style.display='none';
+    successMsg.style.display='block';
+  }catch(err){
+    console.error(err);
+    errorToast.textContent='Something went wrong. Please try again or email us directly.';
+    errorToast.style.display='block';
+    submitBtn.disabled=false;
+    submitBtn.textContent='Get My Free Consultation';
+  }
+});
+</script>
+</body>
+</html>
